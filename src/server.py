@@ -6,7 +6,6 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['MONGO_URI'] = os.getenv('DB_URI')
 
-print('URL:',os.getenv('DB_URI'))
 @app.route('/version', methods=['GET'])
 def version():
   return { 'name': 'Flask server', 'version': '1.0.0'}
@@ -20,4 +19,4 @@ def checkMongoConnection():
     return {'status': False}
 
 if __name__ == '__main__':
-  app.run(port=3030,host='0.0.0.0',debug=True)
+  app.run(port=os.getenv('PORT', 5000),host=os.getenv('HOST', '0.0.0.0'),debug=True)
